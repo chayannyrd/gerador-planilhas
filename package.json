@@ -1,6 +1,7 @@
 {
   "name": "fly-smart",
   "private": true,
+  "homepage": "https://seu-usuario.github.io/seu-repositorio",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
