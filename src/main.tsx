@@ -15,8 +15,6 @@ function App() {
   async function onClick() {
     const input = input_ref.current
 
-    console.log('filipe esteve aqui')
-
     // Se nenhum arquivo foi selecionado, exibe alerta
     if (!input.files.length) {
       return alert("Selecione um arquivo CSV primeiro!")
