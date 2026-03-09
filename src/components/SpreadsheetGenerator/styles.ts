@@ -1,61 +1,110 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+
+const fadeIn = keyframes`
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+`
 
 export const Container = styled.div`
-  background: #161b22;
+  background: #152032;
+  border: 1px solid #1e3248;
+  border-radius: 8px;
   padding: 2.5rem 3rem;
-  border-radius: 14px;
-  min-width: 360px;
-  box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.6),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
-  text-align: center;
+  width: 400px;
+
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+
+  animation: ${fadeIn} 0.35s ease both;
+`
+
+export const Header = styled.div`
+  border-bottom: 1px solid #1e3248;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.75rem;
 `
 
 export const Title = styled.h2`
-  margin-bottom: 1.5rem;
+  font-size: 1rem;
   font-weight: 600;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #e2eaf4;
+`
+
+export const Subtitle = styled.p`
+  font-size: 0.8rem;
+  color: #c8d8e8;
+  margin-top: 0.3rem;
+  font-weight: 400;
+`
+
+export const FileLabel = styled.label`
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #c8d8e8;
+  margin-bottom: 0.5rem;
 `
 
 export const FileInput = styled.input`
   width: 100%;
-  margin-bottom: 1.8rem;
-  color: #c9d1d9;
+  padding: 0.6rem 0.75rem;
+  background: #0f1e2e;
+  border: 1px solid #1e3248;
+  border-radius: 4px;
+  color: #94a3b8;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.825rem;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  transition: border-color 0.15s;
+
+  &:hover {
+    border-color: #2a4a6a;
+  }
 
   &::-webkit-file-upload-button {
-    background: #21262d;
-    border: 1px solid #30363d;
-    border-radius: 6px;
-    padding: 6px 12px;
-    color: #c9d1d9;
+    background: #1e3248;
+    border: none;
+    border-radius: 3px;
+    padding: 4px 12px;
+    color: #94a3b8;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.775rem;
+    font-weight: 500;
     cursor: pointer;
+    margin-right: 10px;
+    transition: background 0.15s;
   }
 
   &::-webkit-file-upload-button:hover {
-    background: #30363d;
+    background: #2a4a6a;
   }
 `
 
 export const GenerateButton = styled.button`
   width: 100%;
-  background: linear-gradient(135deg, #1f6feb, #1158c7);
-  color: white;
+  padding: 11px 0;
   border: none;
-  padding: 12px 0;
-  border-radius: 8px;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 0.95rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.825rem;
   font-weight: 600;
-  letter-spacing: 0.4px;
-  transition: all 0.2s ease;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: #1a4fa0;
+  transition: background 0.15s, transform 0.1s;
 
   &:hover {
-    filter: brightness(1.1);
-    transform: translateY(-1px);
+    background: #1f5cb8;
   }
 
   &:active {
-    transform: translateY(0);
-    filter: brightness(0.95);
+    background: #163d7a;
+    transform: scale(0.995);
   }
 `

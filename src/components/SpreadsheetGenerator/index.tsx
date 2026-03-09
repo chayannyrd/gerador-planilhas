@@ -1,16 +1,28 @@
 import { useSpreadsheetGenerator } from 'hooks/useSpreadsheetGenerator'
-import { Container, FileInput, GenerateButton, Title } from './styles'
+import {
+  Container,
+  FileInput,
+  FileLabel,
+  GenerateButton,
+  Header,
+  Subtitle,
+  Title,
+} from './styles'
 
 export function SpreadsheetGenerator() {
   const { inputRef, anchorRef, onGenerate } = useSpreadsheetGenerator()
 
   return (
     <Container>
-      <Title as="h2">GERAR PLANILHA FORMATADA</Title>
+      <Header>
+        <Title>Gerador de Planilhas</Title>
+        <Subtitle>Importe um CSV e exporte um Excel formatado.</Subtitle>
+      </Header>
 
-      <FileInput ref={inputRef} type="file" accept=".csv" />
+      <FileLabel htmlFor="csv-upload">Arquivo CSV</FileLabel>
+      <FileInput id="csv-upload" ref={inputRef} type="file" accept=".csv" />
 
-      <GenerateButton onClick={onGenerate}>GERAR EXCEL</GenerateButton>
+      <GenerateButton onClick={onGenerate}>Gerar Excel</GenerateButton>
 
       <a ref={anchorRef} hidden />
     </Container>
