@@ -212,7 +212,7 @@ recibo_value.numFmt = monetary_numFmt
   // Renderização do componente
   return (
     <div className="container">
-      <h2>Gerar Planilha Formatada</h2>
+      <h2>GERAR PLANILHA FORMATADA</h2>
 
       {/* Input de upload CSV */}
       <input ref={input_ref} type="file" accept=".csv" />
@@ -220,7 +220,7 @@ recibo_value.numFmt = monetary_numFmt
       <br />
 
       {/* Botão para gerar o Excel */}
-      <button onClick={onClick}>Gerar Excel</button>
+      <button onClick={onClick}>GERAR EXCEL</button>
 
       {/* Link oculto usado para baixar o arquivo */}
       <a ref={anchor_ref} hidden />
