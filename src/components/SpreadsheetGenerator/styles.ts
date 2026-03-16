@@ -1,3 +1,4 @@
+// SpreadsheetGenerator/styles.ts
 import styled, { keyframes } from 'styled-components'
 
 const fadeIn = keyframes`
@@ -107,4 +108,32 @@ export const GenerateButton = styled.button`
     background: #163d7a;
     transform: scale(0.995);
   }
+`
+
+export const SelectLabel = styled.label`
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #c8d8e8;
+  margin-bottom: 0.5rem;
+`
+
+export const Select = styled.select`
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  background: #0f1e2e;
+  border: 1px solid #1e3248;
+  border-radius: 4px;
+  color: #94a3b8;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.825rem;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  appearance: none;
+  transition: border-color 0.15s;
+
+  &:hover { border-color: #2a4a6a; }
+  &:focus { outline: none; border-color: #1a4fa0; }
 `

@@ -1,19 +1,26 @@
 import Papa from 'papaparse'
 
-const EXCLUDED_COLUMNS = [4, 5, 17]
+export type SheetType = 'empresarial' | 'pendencias'
 
-export async function parseCsv(file: File): Promise<string[][]> {
+const EXCLUDED_COLUMNS_EMPRESARIAL = [4, 5, 17]
+const EXCLUDED_COLUMNS_PENDENCIAS = [17]
+
+export async function parseCsv(file: File, type: SheetType): Promise<string[][]> {
   const raw: string[][] = await new Promise((resolve) => {
     Papa.parse(file, {
       complete: (result) => resolve(result.data as string[][]),
     })
   })
 
-  const validColumns = getValidColumns(raw)
+  const excluded = type === 'empresarial'
+    ? EXCLUDED_COLUMNS_EMPRESARIAL
+    : EXCLUDED_COLUMNS_PENDENCIAS
+
+  const validColumns = getValidColumns(raw, excluded)
   return filterColumns(raw, validColumns)
 }
 
-function getValidColumns(data: string[][]): Set<number> {
+function getValidColumns(data: string[][], excluded: number[]): Set<number> {
   const validColumns = new Set<number>()
 
   for (let y = 1; y < data.length; y++) {
@@ -23,7 +30,7 @@ function getValidColumns(data: string[][]): Set<number> {
     }
   }
 
-  EXCLUDED_COLUMNS.forEach((col) => validColumns.delete(col))
+  excluded.forEach((col) => validColumns.delete(col))
 
   return validColumns
 }
