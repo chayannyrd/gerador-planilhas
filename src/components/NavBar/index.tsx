@@ -1,4 +1,5 @@
-import { LogoImg, Nav, NavLink, NavLinks } from './styles'
+import React from 'react'
+import { Backdrop, CloseButton, Drawer, DrawerLink, HamburgerButton, LogoImg, Nav, NavLink, NavLinks } from './styles'
 
 const LINKS = [
   {
@@ -36,20 +37,62 @@ const LINKS = [
       </svg>
     ),
   },
+  {
+    label: 'Consultar CNPJ',
+    href: 'https://solucoes.receita.fazenda.gov.br/Servicos/cnpjreva/Cnpjreva_Solicitacao.asp',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="11" cy="11" r="8" />
+        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      </svg>
+    ),
+  },
 ]
 
 export function NavBar() {
+  const [open, setOpen] = React.useState(false)
+
   return (
-    <Nav>
-      <LogoImg src="fly.png" alt=" Flysmart" />
-      <NavLinks>
+    <>
+      <Nav>
+        <LogoImg src="fly.png" alt="Flysmart" />
+
+        {/* Desktop */}
+        <NavLinks>
+          {LINKS.map(({ label, href, icon }) => (
+            <NavLink key={label} href={href} target="_blank" rel="noopener noreferrer">
+              {icon}
+              {label}
+            </NavLink>
+          ))}
+        </NavLinks>
+
+        {/* Mobile: botão hamburguer */}
+        <HamburgerButton onClick={() => setOpen(true)} aria-label="Abrir menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </HamburgerButton>
+      </Nav>
+
+      {/* Mobile: drawer */}
+      {open && <Backdrop onClick={() => setOpen(false)} />}
+      <Drawer $open={open}>
+        <CloseButton onClick={() => setOpen(false)} aria-label="Fechar menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </CloseButton>
         {LINKS.map(({ label, href, icon }) => (
-          <NavLink key={label} href={href} target="_blank" rel="noopener noreferrer">
+          <DrawerLink key={label} href={href} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>
             {icon}
             {label}
-          </NavLink>
+          </DrawerLink>
         ))}
-      </NavLinks>
-    </Nav>
+      </Drawer>
+    </>
   )
 }
