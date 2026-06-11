@@ -1,7 +1,49 @@
 import React from 'react'
-import { Backdrop, CloseButton, Drawer, DrawerLink, HamburgerButton, LogoImg, Nav, NavLink, NavLinks } from './styles'
+import { useLocation, Link } from 'react-router-dom'
+import {
+  Backdrop,
+  CloseButton,
+  Drawer,
+  DrawerLink,
+  DrawerNavLink,
+  HamburgerButton,
+  LogoImg,
+  Nav,
+  NavLink,
+  NavLinks,
+  NavRouterLink,
+} from './styles'
 
-const LINKS = [
+
+const INTERNAL_LINKS = [
+  {
+    label: 'Gerador de Planilhas',
+    to: '/gerador-planilhas',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <line x1="3" y1="9" x2="21" y2="9" />
+        <line x1="3" y1="15" x2="21" y2="15" />
+        <line x1="9" y1="3" x2="9" y2="21" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Mesclar PDFs',
+    to: '/mesclar-pdf',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M8 6H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3" />
+        <path d="M16 6h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-3" />
+        <line x1="12" y1="3" x2="12" y2="21" />
+        <polyline points="9 6 12 3 15 6" />
+        <polyline points="9 18 12 21 15 18" />
+      </svg>
+    ),
+  },
+]
+
+const EXTERNAL_LINKS = [
   {
     label: 'Relatórios',
     href: 'https://airtable.com/appH9OXwYcxW7ise2/pagbVspANz33YsyeR?4jumb%3Agroup=eyJwZWxJcFNKT0lReXNUVjZ1SyI6W119',
@@ -49,25 +91,36 @@ const LINKS = [
   },
 ]
 
+
 export function NavBar() {
   const [open, setOpen] = React.useState(false)
+  const location = useLocation()
 
   return (
     <>
       <Nav>
-        <LogoImg src="fly.png" alt="Flysmart" />
+        <Link to="/" style={{ lineHeight: 0 }}>
+          <LogoImg src="fly.png" alt="Flysmart" />
+        </Link>
 
         {/* Desktop */}
         <NavLinks>
-          {LINKS.map(({ label, href, icon }) => (
+                    {INTERNAL_LINKS.map(({ label, to, icon }) => (
+            <NavRouterLink key={label} to={to} $active={location.pathname === to}>
+              {icon}
+              {label}
+            </NavRouterLink>
+          ))}
+          {EXTERNAL_LINKS.map(({ label, href, icon }) => (
             <NavLink key={label} href={href} target="_blank" rel="noopener noreferrer">
               {icon}
               {label}
             </NavLink>
           ))}
+
         </NavLinks>
 
-        {/* Mobile: botão hamburguer */}
+        {/* Mobile */}
         <HamburgerButton onClick={() => setOpen(true)} aria-label="Abrir menu">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
             <line x1="3" y1="6" x2="21" y2="6" />
@@ -77,7 +130,6 @@ export function NavBar() {
         </HamburgerButton>
       </Nav>
 
-      {/* Mobile: drawer */}
       {open && <Backdrop onClick={() => setOpen(false)} />}
       <Drawer $open={open}>
         <CloseButton onClick={() => setOpen(false)} aria-label="Fechar menu">
@@ -86,11 +138,17 @@ export function NavBar() {
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
         </CloseButton>
-        {LINKS.map(({ label, href, icon }) => (
+        {EXTERNAL_LINKS.map(({ label, href, icon }) => (
           <DrawerLink key={label} href={href} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>
             {icon}
             {label}
           </DrawerLink>
+        ))}
+        {INTERNAL_LINKS.map(({ label, to, icon }) => (
+          <DrawerNavLink key={label} to={to} $active={location.pathname === to} onClick={() => setOpen(false)}>
+            {icon}
+            {label}
+          </DrawerNavLink>
         ))}
       </Drawer>
     </>

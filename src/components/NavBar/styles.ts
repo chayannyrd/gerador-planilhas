@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export const Nav = styled.nav`
   position: fixed;
@@ -20,7 +21,6 @@ export const LogoImg = styled.img`
   width: auto;
   display: block;
   user-select: none;
-  pointer-events: none;
 `
 
 /* ── Desktop links ─────────────────────────────────────── */
@@ -58,6 +58,33 @@ export const NavLink = styled.a`
     width: 13px;
     height: 13px;
     opacity: 0.6;
+  }
+`
+
+export const NavRouterLink = styled(Link)<{ $active: boolean }>`
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+  color: ${({ $active }) => ($active ? '#c8d8e8' : '#64829a')};
+  background: ${({ $active }) => ($active ? '#1e3248' : 'transparent')};
+
+  &:hover {
+    background: #1e3248;
+    color: #c8d8e8;
+  }
+
+  svg {
+    width: 13px;
+    height: 13px;
+    opacity: ${({ $active }) => ($active ? '1' : '0.6')};
   }
 `
 
@@ -154,6 +181,33 @@ export const DrawerLink = styled.a`
     width: 15px;
     height: 15px;
     opacity: 0.6;
+    flex-shrink: 0;
+  }
+`
+
+export const DrawerNavLink = styled(Link)<{ $active: boolean }>`
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 10px 12px;
+  border-radius: 4px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+  color: ${({ $active }) => ($active ? '#c8d8e8' : '#64829a')};
+  background: ${({ $active }) => ($active ? '#1e3248' : 'transparent')};
+
+  &:hover {
+    background: #1e3248;
+    color: #c8d8e8;
+  }
+
+  svg {
+    width: 15px;
+    height: 15px;
+    opacity: ${({ $active }) => ($active ? '1' : '0.6')};
     flex-shrink: 0;
   }
 `
