@@ -4,6 +4,7 @@ import GlobalStyle from 'styles/global'
 import { NavBar } from 'components/NavBar'
 import { SpreadsheetGenerator } from 'components/SpreadsheetGenerator'
 import { PdfMerger } from 'components/PdfMerger'
+import { Footer } from 'components/PdfMerger/styles'
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
@@ -15,4 +16,5 @@ createRoot(document.getElementById('root')!).render(
     </Routes>
     <GlobalStyle />
   </BrowserRouter>
+
 )
