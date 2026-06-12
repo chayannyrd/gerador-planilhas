@@ -212,8 +212,7 @@ export function PdfMerger() {
       <Hero>
         <Title>Junte seus PDFs de forma simples e rápida</Title>
         <Subtitle>
-          Combine múltiplos arquivos PDF em um único documento com apenas alguns cliques.
-          Rápido, seguro e gratuito.
+          Combine rapidamente múltiplos arquivos PDF em um único documento com apenas alguns cliques.
         </Subtitle>
       </Hero>
 
